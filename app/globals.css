@@ -2,22 +2,209 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 🎨 Design Tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ===== HINTERGRÜNDE ===== */
+  --bg-1: #ffffff; /* Haupt-Hintergrund */
+  --bg-2: #f9fafb; /* Sekundär (Karten, Dropdowns) */
+  --bg-3: #f3f4f6; /* Hover-Zustände */
+  --bg-4: #e5e7eb; /* Linien/Trennungen */
+  --bg-5: #d1d5db; /* Stärkere Kontrastelemente */
+
+  /* ===== MARKENFARBEN ===== */
+  --primary: #1e40af; /* Dunkles Blau – Hauptfarbe (Header, Buttons) */
+  --primary-hover: #1e3a8a; /* Etwas dunkleres Blau für Hover */
+  --primary-text: #f9fafb; /* Sehr hell – Text auf Blau */
+
+  /* ===== SCHRIFTFARBEN ===== */
+  --text-1: #000000; /* Hauptschrift */
+  --text-2: #374151; /* Sekundärschrift */
+  --text-3: #6b7280; /* Deaktivierte/leichte Texte */
+
+  /* ===== BUTTON-FARBEN ===== */
+  --btn-1: var(--primary);
+  --btn-1-hover: var(--primary-hover);
+  --btn-2: #10b981;
+  --btn-2-hover: #059669;
+  --btn-3: #f59e0b;
+  --btn-3-hover: #d97706;
+  --btn-4: #ef4444;
+  --btn-4-hover: #dc2626;
+  --btn-5: #9ca3af;
+  --btn-5-hover: #6b7280;
+
+  /* ===== AKZENTE ===== */
+  --accent-1: var(--primary);
+  --accent-2: #2563eb;
+  --accent-3: #14b8a6;
+
+  /* ===== KARTEN & SCHATTEN ===== */
+  --card-bg: var(--bg-2);
+  --card-border: var(--accent-1);
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-strong: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  /* ===== TYPOGRAFIE ===== */
+  --font-main: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --radius-base: 0.75rem;
+  --transition-base: all 0.2s ease-in-out;
 }
 
+/* ===== DARK MODE ===== */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-1: #0a0a0a;
+    --bg-2: #111827;
+    --bg-3: #1f2937;
+    --bg-4: #374151;
+    --bg-5: #4b5563;
+
+    --primary: #3b82f6; /* Hellblau für Darkmode */
+    --primary-hover: #60a5fa;
+    --primary-text: #ffffff;
+
+    --text-1: #f9fafb;
+    --text-2: #e5e7eb;
+    --text-3: #9ca3af;
+
+    --card-bg: var(--bg-2);
+    --card-border: var(--bg-4);
+    --shadow-soft: 0 2px 8px rgba(255, 255, 255, 0.05);
+    --shadow-strong: 0 4px 16px rgba(255, 255, 255, 0.1);
   }
 }
 
+/* ===== GLOBAL BODY ===== */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-1);
+  color: var(--text-1);
+  font-family: var(--font-main);
+  transition: var(--transition-base);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  transition: var(--transition-base);
+  border: 2px solid transparent;
+}
+
+/* Primärbutton (z. B. Registrieren) */
+.btn-primary {
+  background-color: var(--btn-1);
+  color: var(--primary-text);
+  border-color: var(--btn-1);
+}
+.btn-primary:hover {
+  background-color: var(--btn-1-hover);
+  border-color: var(--btn-1-hover);
+}
+
+/* Sekundärfarben */
+.btn-success {
+  background-color: var(--btn-2);
+  color: white;
+}
+.btn-success:hover {
+  background-color: var(--btn-2-hover);
+}
+.btn-warning {
+  background-color: var(--btn-3);
+  color: white;
+}
+.btn-warning:hover {
+  background-color: var(--btn-3-hover);
+}
+.btn-danger {
+  background-color: var(--btn-4);
+  color: white;
+}
+.btn-danger:hover {
+  background-color: var(--btn-4-hover);
+}
+.btn-neutral {
+  background-color: var(--btn-5);
+  color: white;
+}
+.btn-neutral:hover {
+  background-color: var(--btn-5-hover);
+}
+
+/* ===== KARTEN ===== */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem;
+  transition: var(--transition-base);
+}
+.card:hover {
+  box-shadow: var(--shadow-strong);
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown {
+  background-color: var(--bg-2);
+  color: var(--text-1);
+  border: 1px solid var(--bg-4);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-strong);
+  transition: var(--transition-base);
+  z-index: 50;
+  min-width: 10rem;
+}
+
+.dropdown a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--text-1);
+  text-decoration: none;
+  transition: var(--transition-base);
+  border-radius: var(--radius-base);
+}
+
+.dropdown a:hover {
+  background-color: var(--bg-3);
+  color: var(--accent-1);
+}
+
+/* ===== HEADER ===== */
+.header {
+  background-color: var(--primary);
+  color: var(--primary-text);
+  box-shadow: var(--shadow-soft);
+}
+.header a {
+  color: var(--primary-text);
+  transition: var(--transition-base);
+}
+.header a:hover {
+  color: var(--bg-1);
+}
+
+/* ===== UTILITIES ===== */
+.text-muted {
+  color: var(--text-3);
+}
+.text-accent {
+  color: var(--accent-1);
+}
+.bg-accent {
+  background-color: var(--accent-1);
+  color: var(--primary-text);
+}
+.border-soft {
+  border-color: var(--card-border);
+}
+.rounded-base {
+  border-radius: var(--radius-base);
 }
 
 @layer utilities {

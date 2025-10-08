@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 
 const testimonials = [
@@ -15,25 +16,62 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="w-full py-24 bg-gray-950/80 backdrop-blur-sm flex flex-col items-center text-center">
-        <h1 className="text-5xl font-bold mb-6 text-blue-300">Scoolie – KI-Nachhilfe für Schüler</h1>
-        <p className="text-xl mb-4 max-w-3xl text-gray-200">
-          Scoolie analysiert, was im Unterricht passiert, und schlägt automatisch passende Lerninhalte und Arbeitsblätter vor – perfekt angepasst an Klassenstufe, Bundesland und Schulform.
+      <section
+        className="w-full py-24 flex flex-col items-center text-center"
+        style={{
+          backgroundColor: 'var(--bg-2)',
+          color: 'var(--text-1)',
+        }}
+      >
+        <h1
+          className="text-5xl font-bold mb-6"
+          style={{ color: 'var(--accent-1)' }}
+        >
+          Scoolie – KI-Nachhilfe für Schüler
+        </h1>
+        <p
+          className="text-xl mb-4 max-w-3xl"
+          style={{ color: 'var(--text-2)' }}
+        >
+          Scoolie analysiert, was im Unterricht passiert, und schlägt automatisch
+          passende Lerninhalte und Arbeitsblätter vor – perfekt angepasst an
+          Klassenstufe, Bundesland und Schulform.
         </p>
-        <p className="text-gray-300 max-w-2xl">
-          Hilft Lehrern, Schülern und Eltern, den Lernstoff effektiv zu strukturieren.
+        <p
+          className="max-w-2xl"
+          style={{ color: 'var(--text-3)' }}
+        >
+          Hilft Lehrern, Schülern und Eltern, den Lernstoff effektiv zu
+          strukturieren.
         </p>
       </section>
 
       {/* Testimonials */}
-      <section className="w-full py-20 bg-gray-800/80 backdrop-blur-sm">
+      <section
+        className="w-full py-20"
+        style={{ backgroundColor: 'var(--bg-3)' }}
+      >
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-12 text-blue-300">Was unsere Nutzer sagen</h2>
+          <h2
+            className="text-4xl font-bold mb-12"
+            style={{ color: 'var(--accent-1)' }}
+          >
+            Was unsere Nutzer sagen
+          </h2>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-gray-900/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg text-gray-100">
-                <p className="italic mb-4">{t.text}</p>
-                <h3 className="font-bold">{t.name}</h3>
+              <div
+                key={i}
+                className="card"
+                style={{
+                  backgroundColor: 'var(--card-bg)',
+                  color: 'var(--text-2)',
+                  borderColor: 'var(--card-border)',
+                }}
+              >
+                <p className="italic mb-4 text-[var(--text-3)]">{t.text}</p>
+                <h3 className="font-bold text-[var(--text-1)]">{t.name}</h3>
               </div>
             ))}
           </div>
