@@ -1,6 +1,5 @@
 import { stripe } from '@/lib/stripe';
 import { NextResponse } from 'next/server';
-import { buffer } from 'micro';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -8,14 +7,11 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// Neue Konfiguration für Next.js App Router
+export const runtime = 'nodejs'; // ersetzt das alte config.api.bodyParser = false
 
 export async function POST(req: Request) {
-  const rawBody = await req.text();
+  const rawBody = await req.text(); // raw body bleibt erhalten
   const sig = req.headers.get('stripe-signature')!;
   let event;
 
@@ -25,13 +21,16 @@ export async function POST(req: Request) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-  } catch (err) {
+  } catch (err: any) {
     return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
   }
 
   const data = event.data.object as any;
 
-  if (event.type === 'customer.subscription.updated' || event.type === 'customer.subscription.created') {
+  if (
+    event.type === 'customer.subscription.updated' ||
+    event.type === 'customer.subscription.created'
+  ) {
     const plan = data.items.data[0].plan.nickname;
     const customerId = data.customer;
 
